@@ -1,0 +1,90 @@
+import numpy as np
+x=np.array([[1,2,3],[4,5,6]])
+print("x:\n{}".format(x))
+
+
+import matplotlib.pyplot as plt
+x=np.linspace(-10,10,100)
+y=np.sin(x)
+plt.plot(x,y,marker="x")
+
+
+
+import pandas as pd
+data= {'name':["John","Anna","Peter","Linda"],
+       'location':["New York","Paris","Berlin","Londra"],
+       'age':[24,13,53,33]
+       }
+data_pandas =pd.DataFrame(data)
+display(data_pandas)
+
+display(data_pandas[data_pandas.age>30])
+
+*********************************************
+from sklearn.datasets import load_iris
+iris_dataset=load_iris()
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(
+    iris_dataset['data'],iris_dataset['target'],random_state=0
+
+from sklearn.neighbors import KNeighborsClassifier
+knn=KNeighborsClassifier(n_neighbors=1)
+
+
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+iris_dataset=load_iris()
+x_train,x_test,y_train,y_test=train_test_split(
+    iris_dataset['data'],iris_dataset['target'],random_state=0
+    )
+
+**********************************************
+
+from sklearn.datasets import load_breast_cancer
+cancer=load_breast_cancer()
+print("cancer.keys():\n{}".format(cancer.keys()))
+
+from sklearn.model_selection import train_test_split
+x=cancer.data
+y=cancer.target
+x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=0)
+
+from sklearn.neighbors import KNeighborsClassifier
+clf=KNeighborsClassifier(n_neighbors=3)
+
+clf.fit(x_train, y_train)
+print("test set accuracy:{:.2f}".format(clf.score(x_test,y_test)))
+
+***********************************************
+
+!pip install mglearn 
+import mglearn 
+from sklearn.linear_model import LinearRegression 
+from sklearn.model_selection import train_test_split 
+X,y=mglearn.datasets.make_wave(n_samples=60)
+X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=42)
+lr=LinearRegression().fit(X_train,y_train)
+
+!pip install mglearn
+import mglearn
+from sklearn.linear_model import LinearRegression
+X,y=mglearn.datasets.make_wave(n_samples=60)
+X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=42)
+
+print("Training set score: {:.2f}".format(lr.score(X_train, y_train)))
+print("Test set score: {:.2f}".format(lr.score(X_test, y_test)))
+
+
+from sklearn.linear_model import Ridge
+ridge =Ridge(alpha=10).fit(X_train,y_train)
+print("Training set score:{:.2f}".format(ridge.score(X_train,y_train)))
+print("Test set score:{:.2f}".format(ridge.score(X_test,y_test)))
+
+from sklearn.linear_model import Lasso
+import numpy as np
+lasso=Lasso(alpha=0.01,max_iter=100000).fit(X_train,y_train)
+print("Training set score:{:.2f}".format(lasso.score(X_train,y_train)))
+print("Test set score:{:.2f}".format(lasso.score(X_test,y_test)))
+print("Number of features used:{}".format(np.sum(lasso.coef_!=0)))
